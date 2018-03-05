@@ -8,19 +8,18 @@ default: &default
 
   # Additional paths webpack should lookup modules
   # ['app/assets', 'engine/foo/app/assets']
-  resolved_paths: []
+  resolved_paths: ['app/javascript/angular/src']
 
   # Reload manifest.json on all requests so we reload latest compiled packs
   cache_manifest: false
 
   extensions:
+    - .tsx
+    - .ts
     - .js
     - .sass
     - .scss
     - .css
-    - .module.sass
-    - .module.scss
-    - .module.css
     - .png
     - .svg
     - .gif
