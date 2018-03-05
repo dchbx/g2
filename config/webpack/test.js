@@ -1,9 +1,10 @@
 const environment = require('./environment')
+const typescript =  require('./loaders/typescript')
 const angular_html =  require('./loaders/angular_html')
-const css =  require('./loaders/css')
+const angular_css =  require('./loaders/angular_css')
 
-// Overide default handler
-environment.loaders.set('css', css)
+environment.loaders.append('typescript', typescript)
 environment.loaders.append('angular_html', angular_html)
+environment.loaders.append('angular_css', angular_css)
 
 module.exports = environment.toWebpackConfig()
