@@ -18,6 +18,6 @@ const bootApplication = () => {
 if (document.readyState === 'complete') {
   window.onload = () => bootApplication();
   location.reload();
-} else{
+} else {
   document.addEventListener('DOMContentLoaded', bootApplication);
 }
