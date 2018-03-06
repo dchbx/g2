@@ -8,7 +8,7 @@ module.exports = function (config) {
     plugins: [
       require('karma-jasmine'),
       require('karma-phantomjs-launcher'),
-      require('karma-jasmine-html-reporter'),
+      require('karma-junit-reporter'),
       require('karma-coverage-istanbul-reporter'),
       require('@angular/cli/plugins/karma')
     ],
@@ -19,10 +19,15 @@ module.exports = function (config) {
       reports: [ 'html', 'lcovonly' ],
       fixWebpackSourcePaths: true
     },
+    junitReporter : {
+	    outputDir: "./angular_test_results",
+	    useBrowserName: false,
+	    outputFile: "angular_karma_junit.xml"
+    },
     angularCli: {
       environment: 'dev'
     },
-    reporters: ['progress'],
+    reporters: ['progress', 'junit'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,

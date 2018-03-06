@@ -4,7 +4,6 @@
     "outDir": "./dist-aot",
     "baseUrl": "./",
     "module": "es2015",
-    "strictNullChecks": true,
     "sourceMap": false,
     "diagnostics": true
   },

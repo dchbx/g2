@@ -23,6 +23,21 @@ exports.config = {
     print: function() {}
   },
   onPrepare() {
+    var jasmineReporters = require('jasmine-reporters');
+    var junitReporter = new jasmineReporters.JUnitXmlReporter({
+
+      // setup the output path for the junit reports
+      savePath: 'angular_test_results/',
+
+      // conslidate all true:
+      //   output/junitresults.xml
+      //
+      // conslidate all set to false:
+      //   output/junitresults-example1.xml
+      //   output/junitresults-example2.xml
+      consolidateAll: true
+    });
+    jasmine.getEnv().addReporter(junitReporter);
     require('ts-node').register({
       project: './app/javascript/angular/e2e/tsconfig.e2e.json'
     });
