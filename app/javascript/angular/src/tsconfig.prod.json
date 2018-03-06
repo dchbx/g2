@@ -1,0 +1,19 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist-aot",
+    "baseUrl": "./",
+    "module": "es2015",
+    "strictNullChecks": true,
+    "sourceMap": false,
+    "diagnostics": true
+  },
+  "exclude": [
+    "main.ts",
+    "test.ts",
+    "**/*.spec.ts"
+  ],
+  "angularCompilerOptions": {
+    "skipMetadataEmit" : true
+  }
+}

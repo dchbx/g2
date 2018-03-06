@@ -1,0 +1,5 @@
+<% if Rails.env.production? %>
+import "../angular/src/main.prod.ts"
+<% else %>
+require("../angular/src/main.ts")
+<% end %>

@@ -7,6 +7,7 @@
     "strictNullChecks": true
   },
   "exclude": [
+    "main.prod.ts",
     "test.ts",
     "**/*.spec.ts"
   ]

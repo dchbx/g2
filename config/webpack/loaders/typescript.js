@@ -5,5 +5,6 @@ module.exports = {
     options: {
 	    configFile: "tsconfig.app.json"
     }
-  }]
+  },
+  { loader: 'angular2-template-loader'}]
 }
