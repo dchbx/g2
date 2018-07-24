@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/dchbx/acapi.git
-  revision: 39365926242d65e81680bcbdfa6e6bd145da79c5
-  tag: 1.2.0
+  revision: 0e84085ad3f0663990436e890536090e1402fae9
+  tag: 1.2.1
   specs:
-    acapi (1.2.0)
+    acapi (1.2.1)
       activesupport (> 4.2.0)
       bunny (~> 1.7.0)
       sneakers
