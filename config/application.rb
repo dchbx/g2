@@ -29,5 +29,11 @@ module G2
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    
+    config.acapi.app_id = "g2"
+
+    unless Rails.env.test?
+      config.acapi.add_amqp_worker("Subscribers::EventMessageSubscriber")
+    end
   end
 end
