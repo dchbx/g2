@@ -6,11 +6,12 @@ class EventMessageImportService
   def import_message(event_name, props, payload)
     headers = props.headers || {}
     workflow_id = extract_workflow_id(headers)
+    return nil if workflow_id.blank?
     matched_message_type = @event_message_matcher.match_message(event_name)
     if matched_message_type
       flat_headers = flatten_headers(props)
       em_payload = EventMessagePayload.create!(
-         body: payload     
+         body: payload
       )
       new_message = EventMessage.create!({
          event_name: event_name,
