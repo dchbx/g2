@@ -7,4 +7,6 @@ class EventMessage
   field :headers, type: Hash
 
   belongs_to :event_message_payload
+
+  index({:workflow_id => 1})
 end
