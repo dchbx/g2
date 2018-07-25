@@ -1,12 +1,13 @@
 module Subscribers
-  class EventMessageSubscriber
+  class RequestMessageSubscriber
     include Acapi::Notifiers
 
     def self.worker_specification
       Acapi::Amqp::WorkerSpecification.new(
-        :queue_name => "event_message_subscriber",
+        :queue_name => "request_message_subscriber",
         :kind => :topic,
-        :routing_key => ["*.events.#", "*.application.gluedb.#"]
+        :message_category => :request,
+        :routing_key => ["resource.#"]
       )
     end
 
