@@ -24,6 +24,7 @@ gem 'acapi', git: "https://github.com/dchbx/acapi.git", tag: '1.3.0'
 # gem 'rack-cors'
 
 gem 'devise', '4.4.3'
+gem 'devise-jwt'
 gem 'pundit', '1.1.0'
 gem 'jbuilder', '2.7.0'
 
