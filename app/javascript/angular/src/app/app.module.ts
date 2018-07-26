@@ -7,7 +7,7 @@ import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from './app.component';
 import { UserLoginComponent } from './authentication/user_login.component'
-import { WorkflowsIndexComponent } from './workflows_index.component';
+import { WorkflowsIndexComponent } from './workflows/workflows_index.component';
 import { UserAuthenticated } from './authentication/user_authenticated';
 import { JwtInterceptor } from "./authentication/jwt_interceptor"
 

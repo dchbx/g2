@@ -10,4 +10,14 @@ class User
   field :encrypted_password, type: String
   
   index({:email => 1})
+
+  def self.primary_key
+    :_id
+  end
+
+  def jwt_payload
+    {
+      email: email
+    }
+  end
 end
