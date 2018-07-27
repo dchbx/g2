@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { Router } from '@angular/router';
+import { User, UserToken } from './user';
 
 @Injectable()
 export class LoginService {
@@ -11,7 +12,7 @@ export class LoginService {
   constructor(private http: HttpClient, private router:Router ) {
   }
   
-  login(user_email, user_password) {    
+  login(user_email, user_password) {
     this.http.post('/login.json',
     {
       "user": {
@@ -24,11 +25,11 @@ export class LoginService {
     })
     .subscribe(
       (response:HttpResponse<any>) => {
-          var user_record = response.body;
-          user_record["token"] = this.extract_jwt_from_header(response.headers);
+         var auth_header = <string>response.headers.get("Authorization");
+         var user_record = UserToken.parse(auth_header);
           // set token property
           // store username and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(response.body));
+          UserToken.store(user_record);
           // return true to indicate successful login
           this.router.navigate(['/']);
           this.errorMessage = '';
@@ -39,11 +40,6 @@ export class LoginService {
   
   logout() {
     // clear token remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
-  }
-
-  extract_jwt_from_header(headers) : string {
-    var auth_header = <string>headers.get("Authorization");
-    return auth_header.replace(/^Bearer /, "");
+    UserToken.remove();
   }
 }
