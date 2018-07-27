@@ -12,7 +12,7 @@ export class LoginService {
   constructor(private http: HttpClient, private router:Router ) {
   }
   
-  login(user_email, user_password) {
+  login(user_email, user_password, return_url) {
     this.http.post('/login.json',
     {
       "user": {
@@ -30,8 +30,7 @@ export class LoginService {
           // set token property
           // store username and jwt token in local storage to keep user logged in between page refreshes
           UserToken.store(user_record);
-          // return true to indicate successful login
-          this.router.navigate(['/']);
+          this.router.navigateByUrl(return_url);
           this.errorMessage = '';
         },
       err => console.log(err)

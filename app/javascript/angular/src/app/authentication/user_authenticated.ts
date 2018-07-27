@@ -13,7 +13,7 @@ export class UserAuthenticated implements CanActivate {
     if (UserToken.hasValidToken()) {
       return true;
     }
-    this.router.navigate(['/user_login']);
+    this.router.navigate(['/user_login'], { queryParams: { returnUrl: state.url }});
     return false;
   }
 }
