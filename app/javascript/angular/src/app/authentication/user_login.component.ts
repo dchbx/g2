@@ -1,15 +1,16 @@
 import { Component } from "@angular/core";
 import { LoginService } from "./login_service";
 import { ActivatedRoute } from "@angular/router";
+import { LoginAttempt } from "./login_attempt";
 
 @Component({
   templateUrl: './user_login.component.html',
   providers: [LoginService]
 })
-export class UserLoginComponent {
+export class UserLoginComponent implements LoginAttempt {
   username : string = "";
   password : string = "";
-  error = '';
+  errorMessage = '';
   returnUrl : string = "/";
 
   constructor(
@@ -21,6 +22,6 @@ export class UserLoginComponent {
   }
 
   tryLogin() {
-    this.loginService.login(this.username, this.password, this.returnUrl);
+    this.loginService.login(this, this.returnUrl);
   }
 }

@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { Router } from '@angular/router';
-import { User, UserToken } from './user';
+import { UserToken } from './user';
+import { LoginAttempt } from './login_attempt';
 
 @Injectable()
 export class LoginService {
   public user: any;
-  public errorMessage: any;
   
-  constructor(private http: HttpClient, private router:Router ) {
+  constructor(private http: HttpClient, private router: Router) {
   }
   
-  login(user_email, user_password, return_url) {
+  login(login_attempt : LoginAttempt, return_url) {
     this.http.post('/login.json',
     {
       "user": {
-        email: user_email,
-        password: user_password
+        email: login_attempt.username,
+        password: login_attempt.password
       }
     }, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -31,9 +31,11 @@ export class LoginService {
           // store username and jwt token in local storage to keep user logged in between page refreshes
           UserToken.store(user_record);
           this.router.navigateByUrl(return_url);
-          this.errorMessage = '';
+          login_attempt.errorMessage = '';
         },
-      err => console.log(err)
+      (err:HttpErrorResponse) => {
+        login_attempt.errorMessage = err.error.error;
+      }
     )
   }
   
