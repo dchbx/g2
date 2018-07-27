@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { Workflow } from "../models/workflow";
 import { WorkflowResourceService } from "./workflow_resource.service";
+import { WorkflowIndexEntry } from './workflow_index_entry';
 
 @Component({
   templateUrl: './workflows_index.component.html',
   providers: [WorkflowResourceService]
 })
 export class WorkflowsIndexComponent {
-  workflows : Array<Workflow> = new Array<Workflow>()
+  workflows : Array<WorkflowIndexEntry> = new Array<WorkflowIndexEntry>()
 
   constructor(private workflowResourceService: WorkflowResourceService) { }
 

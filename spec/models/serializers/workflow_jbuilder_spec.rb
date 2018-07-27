@@ -2,10 +2,12 @@ require "rails_helper"
 
 describe Serializers::WorkflowJbuilder, "serializing a workflow" do
   let(:name) { "some workflow name"}
+  let(:workflow_primary_id) { "workflow_primary_id" }
   let(:workflow_ids) { ["workflow_id_1", "workflow_id_2"] }
   let(:workflow) do
      instance_double(
        ::Workflow,
+       id: workflow_primary_id,
        name: name,
        workflow_ids: workflow_ids,
        event_messages: []
@@ -13,6 +15,11 @@ describe Serializers::WorkflowJbuilder, "serializing a workflow" do
   end
 
   subject { described_class.serialize(workflow).target! }
+
+  it "serializes the id" do
+    data = JSON.parse(subject)
+    expect(data["id"]).to eq workflow_primary_id
+  end
 
   it "serializes the name" do
     data = JSON.parse(subject)
@@ -32,10 +39,12 @@ end
 
 describe Serializers::WorkflowJbuilder, "serializing a list of workflows" do
   let(:name) { "some workflow name"}
+  let(:workflow_primary_id) { "workflow_primary_id" }
   let(:workflow_ids) { ["workflow_id_1", "workflow_id_2"] }
   let(:workflow) do
      instance_double(
        ::Workflow,
+       id: workflow_primary_id,
        name: name,
        workflow_ids: workflow_ids,
        event_messages: []
@@ -43,6 +52,11 @@ describe Serializers::WorkflowJbuilder, "serializing a list of workflows" do
   end
 
   subject { described_class.serialize_collection([workflow]).target! }
+
+  it "serializes the id" do
+    data = JSON.parse(subject)
+    expect(data.first["id"]).to eq workflow_primary_id
+  end
 
   it "serialized the correct number of elements" do
     data = JSON.parse(subject)
@@ -57,10 +71,5 @@ describe Serializers::WorkflowJbuilder, "serializing a list of workflows" do
   it "serializes the workflow_ids" do
     data = JSON.parse(subject)
     expect(data.first["workflow_ids"]).to eq workflow_ids
-  end
-
-  it "serializes the event messages" do
-    data = JSON.parse(subject)
-    expect(data.first["event_messages"]).to eq []
   end
 end
