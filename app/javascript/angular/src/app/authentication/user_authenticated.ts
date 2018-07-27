@@ -10,7 +10,7 @@ export class UserAuthenticated implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (!localStorage.getItem("currentUser")) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/user_login']);
       return false;
     }
     return true;

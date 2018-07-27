@@ -1,3 +1,4 @@
+module Api
 class WorkflowsController < ApplicationController
   def index
     @workflows = Workflow.where("workflow_ids.1" => {"$exists" => true}).limit(20)
@@ -8,4 +9,5 @@ class WorkflowsController < ApplicationController
     @workflow = Workflow.find(params[:id])
     render json: ::Serializers::WorkflowJbuilder.serialize(@workflow).target!, status: 200
   end
+end
 end

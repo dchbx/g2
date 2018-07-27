@@ -13,7 +13,7 @@ import { JwtInterceptor } from "./authentication/jwt_interceptor"
 
 
 const appRoutes : Routes = [
-  { path: 'login', component: UserLoginComponent },
+  { path: 'user_login', component: UserLoginComponent },
   { path: 'workflows', component: WorkflowsIndexComponent, canActivate: [UserAuthenticated] }
 ];
 

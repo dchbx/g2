@@ -7,6 +7,6 @@ export class WorkflowResourceService {
   constructor(private http: HttpClient) { }
 
   getAll() {
-    return this.http.get<WorkflowIndexEntry[]>('/workflows');
+    return this.http.get<WorkflowIndexEntry[]>('/api/workflows');
   }
 }

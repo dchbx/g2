@@ -11,7 +11,10 @@ Rails.application.routes.draw do
     defaults: { format: :json }
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :workflows, only: [:show, :index], format: :json
+  namespace :api do
+    resources :workflows, only: [:show, :index], format: :json
+  end
 
+  match "*path" => 'pages#index', via: :all
   root to: "pages#index"
 end
