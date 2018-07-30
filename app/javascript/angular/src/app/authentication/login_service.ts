@@ -9,8 +9,6 @@ import { LoginAttempt } from './login_attempt';
 
 @Injectable()
 export class LoginService {
-  public user: any;
-  
   constructor(private http: HttpClient, private router: Router) {
   }
   
@@ -18,7 +16,7 @@ export class LoginService {
     var requestHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    requestHeaders.set(JwtInterceptor.SKIP_INTERCEPTORS_HEADER, "true");
+    var fullHeaders = requestHeaders.set(JwtInterceptor.SKIP_INTERCEPTORS_HEADER, "true");
     this.http.post('/login.json',
     {
       "user": {
@@ -26,7 +24,7 @@ export class LoginService {
         password: login_attempt.password
       }
     }, {
-      headers: requestHeaders,
+      headers: fullHeaders,
       observe: 'response'
     })
     .subscribe(
@@ -40,6 +38,7 @@ export class LoginService {
           login_attempt.errorMessage = '';
         },
       (err:HttpErrorResponse) => {
+        console.log(err.error.error);
         login_attempt.errorMessage = err.error.error;
       }
     )
@@ -47,6 +46,30 @@ export class LoginService {
   
   logout() {
     // clear token remove user from local storage to log user out
-    JwtUserService.remove();
+    var currentUser = JwtUserService.get<User>();
+    if (currentUser) {
+      var requestHeaders = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${currentUser.token}`
+      });
+      var fullHeaders = requestHeaders.set(JwtInterceptor.SKIP_INTERCEPTORS_HEADER, "true");
+      this.http.delete('/logout.json',
+      {
+        headers: fullHeaders,
+        observe: 'response'
+      })
+      .subscribe(
+        (response:HttpResponse<any>) => {
+            JwtUserService.remove();
+            this.router.navigate(['/user_login']);
+          },
+        (err:HttpErrorResponse) => {
+          JwtUserService.remove();
+          this.router.navigate(['/user_login']);
+        }
+      )
+    } else {
+      this.router.navigate(['/user_login']);
+    }
   }
 }
