@@ -3,6 +3,7 @@ import { Maybe } from "../../lib/maybe"
 export interface JwtUserBase {
   token: string
   exp: number
+  iat: number
 }
 
 export class JwtUserService {
@@ -39,5 +40,15 @@ export class JwtUserService {
   static valid<T extends JwtUserBase>(user: T) : boolean {
     var now_time = Math.floor(Date.now() / 1000);
     return(user.exp > now_time);
+  }
+
+  static inRefreshWindow<T extends JwtUserBase>(user: T) : boolean {
+    var now_time = Math.floor(Date.now() / 1000);
+    var liveLength = user.exp - user.iat;
+    var refreshWindowStart = user.iat + (liveLength / 2);
+    if (user.exp <= now_time) {
+      return false;
+    }
+    return (refreshWindowStart < now_time);
   }
 }

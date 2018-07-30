@@ -8,18 +8,21 @@ import { FormsModule } from "@angular/forms";
 import { AppComponent } from './app.component';
 import { UserLoginComponent } from './authentication/user_login.component'
 import { WorkflowsIndexComponent } from './workflows/workflows_index.component';
+import { WorkflowShowComponent } from './workflows/workflow_show.component';
 import { UserAuthenticated } from './authentication/user_authenticated';
 import { JwtInterceptor } from "./authentication/jwt_interceptor"
 
 
 const appRoutes : Routes = [
   { path: 'user_login', component: UserLoginComponent },
+  { path: 'workflows/:id', component: WorkflowShowComponent, canActivate: [UserAuthenticated] },
   { path: 'workflows', component: WorkflowsIndexComponent, canActivate: [UserAuthenticated] }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
+    WorkflowShowComponent,
     WorkflowsIndexComponent,
     UserLoginComponent
   ],

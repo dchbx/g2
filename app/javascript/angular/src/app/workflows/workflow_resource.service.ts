@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { WorkflowIndexEntry } from './workflow_index_entry';
+import { Workflow } from '../models/workflow';
 
 @Injectable()
 export class WorkflowResourceService {
@@ -8,5 +9,9 @@ export class WorkflowResourceService {
 
   getAll() {
     return this.http.get<WorkflowIndexEntry[]>('/api/workflows');
+  }
+
+  get(workflowId : string) {
+    return this.http.get<Workflow>('/api/workflows/' + workflowId + ".json");
   }
 }

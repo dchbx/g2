@@ -1,32 +1,23 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
-import { Router } from '@angular/router';
 import { User } from './user';
 import { JwtUserService } from "./jwt_user_service";
 import { JwtInterceptor } from "./jwt_interceptor";
-import { LoginAttempt } from './login_attempt';
 
-@Injectable()
-export class LoginService {
+export class JwtRefreshService {
   public user: any;
   
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
   }
   
-  login(login_attempt : LoginAttempt, return_url) {
+  refresh(user: User) {
     var requestHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${user.token}`
     });
-    requestHeaders.set(JwtInterceptor.SKIP_INTERCEPTORS_HEADER, "true");
-    this.http.post('/login.json',
-    {
-      "user": {
-        email: login_attempt.username,
-        password: login_attempt.password
-      }
-    }, {
-      headers: requestHeaders,
+    var fullHeaders = requestHeaders.set(JwtInterceptor.SKIP_INTERCEPTORS_HEADER, "true");
+    this.http.get('/refresh_token.json', {
+      headers: fullHeaders,
       observe: 'response'
     })
     .subscribe(
@@ -36,17 +27,10 @@ export class LoginService {
           // set token property
           // store username and jwt token in local storage to keep user logged in between page refreshes
           JwtUserService.store<User>(user_record);
-          this.router.navigateByUrl(return_url);
-          login_attempt.errorMessage = '';
         },
       (err:HttpErrorResponse) => {
-        login_attempt.errorMessage = err.error.error;
+        console.log(JSON.stringify(err));
       }
     )
-  }
-  
-  logout() {
-    // clear token remove user from local storage to log user out
-    JwtUserService.remove();
   }
 }

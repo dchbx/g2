@@ -285,12 +285,13 @@ Devise.setup do |config|
   config.jwt do |jwt|
     jwt.secret = 'khjasf987q3498734lkjcsfee83d98jf398283jfds'
     jwt.dispatch_requests = [
-      ['POST', %r{^/login$}]
+      ['POST', %r{^/login$}],
+      ['GET', %r{^/refresh_token.json$}]
     ]
     jwt.revocation_requests = [
       ['DELETE', %r{^/logout$}]
     ]
-    jwt.expiration_time = 30.minutes.to_i
+    jwt.expiration_time = 2.minutes.to_i
 
     jwt.request_formats = {
       user: [:json]

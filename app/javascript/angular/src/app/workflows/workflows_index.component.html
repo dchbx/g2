@@ -8,7 +8,9 @@
   </thead>
   <tbody>
     <tr *ngFor="let workflow of workflows">
-      <td>{{workflow.name}}</td>
+      <td>
+        <a routerLink="['/workflows', workflow.id]">{{workflow.name}}</a>
+      </td>
     </tr>
   </tbody>
 </table>

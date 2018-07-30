@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     },
     defaults: { format: :json }
 
+  get "refresh_token", to: "tokens#refresh", format: [:json]
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api do
     resources :workflows, only: [:show, :index], format: :json
