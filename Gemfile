@@ -27,6 +27,8 @@ gem 'devise', '4.4.3'
 gem 'devise-jwt'
 gem 'pundit', '1.1.0'
 gem 'jbuilder', '2.7.0'
+gem 'capistrano', '3.10.2', require: false
+gem 'capistrano-rails', '1.3.1', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
