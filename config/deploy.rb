@@ -18,6 +18,8 @@ set :linked_files, (fetch(:linked_files, []) | ['config/mongoid.yml', 'config/in
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'pids', 'eye')
 
 set :assets_roles, [:web, :app]
+
+set :assets_prefix, 'packs'
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
