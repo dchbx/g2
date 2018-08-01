@@ -37,9 +37,7 @@ Eye.application 'eye_enroll' do
   notify :dplappert, :info
   notify :mworku, :info
 
-<% if @start_listeners %>
   define_forked_worker("amqp_event_worker", BUS_DIRECTORY, "bundle exec rails r -e production script/amqp_event_worker.rb", true)
-<% end %>
 
   process("unicorn") do
     working_dir BUS_DIRECTORY
