@@ -7,5 +7,6 @@ environment.plugins.append('angular_aot_plugin', typescript.plugin)
 environment.loaders.append('aot_typescript', typescript.handler)
 environment.loaders.append('angular_html', angular_html)
 environment.loaders.append('angular_css', angular_css)
+environment.config.devtool = false
 
 module.exports = environment.toWebpackConfig()
