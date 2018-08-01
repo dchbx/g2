@@ -10,15 +10,15 @@ class EventMessageImportService
     matched_message_type = @event_message_matcher.match_message(event_name)
     if matched_message_type
       flat_headers = flatten_headers(props)
-      em_payload = EventMessagePayload.create!(
-         body: payload
-      )
       new_message = EventMessage.create!({
-         event_name: event_name,
-         workflow_id: workflow_id,
-         headers: flat_headers,
-         event_message_payload: em_payload
-       })
+        event_name: event_name,
+        workflow_id: workflow_id,
+        headers: flat_headers
+      })
+      em_payload = EventMessagePayload.create!(
+         body: payload,
+         event_message: new_message
+      )
       workflow = Workflow.find_or_build_workflow(workflow_id, event_name)
       if matched_message_type.merges_workflows
          workflow.merge!(matched_message_type.extract_child_workflow_ids(flat_headers,payload))

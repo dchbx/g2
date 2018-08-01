@@ -6,7 +6,6 @@ class EventMessage
   field :workflow_id, type: String
   field :headers, type: Hash
 
-  belongs_to :event_message_payload
-
+  has_one :event_message_payload, inverse_of: :event_message_payload
   index({:workflow_id => 1})
 end
