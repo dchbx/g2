@@ -12,7 +12,7 @@
       <tr *ngFor="let event_message of workflow.event_messages">
         <td>{{event_message.event_name}}</td>
         <td>{{event_message.workflow_id}}</td>
-        <td>{{JSON.stringify(event_message.headers)}}</td>
+        <td>{{event_message.headers}}</td>
       </tr>
     </tbody>
   </table>
