@@ -5,7 +5,7 @@ module Serializers
     end
 
     def to_builder(builder)
-      builder.set!(:id, @workflow.id)
+      builder.set!(:id, @workflow.id.to_s)
       builder.set!(:name, @workflow.name)
       builder.set!(:workflow_ids, @workflow.workflow_ids)
       builder.set!(:event_messages, @workflow.event_messages) do |event_message|
@@ -21,7 +21,7 @@ module Serializers
 
     def self.serialize_collection(workflows, builder = Jbuilder.new)
       builder.array!(workflows) do |workflow|
-        builder.set!(:id, workflow.id)
+        builder.set!(:id, workflow.id.to_s)
         builder.set!(:name, workflow.name)
         builder.set!(:workflow_ids, workflow.workflow_ids)
       end
