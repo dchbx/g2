@@ -10,9 +10,19 @@ EventMessageKind.create!(
 )
 
 EventMessageKind.create!(
+  name_expression: "*.application.glue.#"
+)
+
+EventMessageKind.create!(
   name_expression: "info.application.gluedb.policies.enrollment_action_determined",
   merges_workflows: true,
   child_workflow_extractor: JsonChildWorkflowExtractor.new(
     access_path: ["event_workflow_ids"]
   )
 )
+
+User.create!({
+  email: "trey.evans@dc.gov",
+  password: "abcdefgh",
+  password_confirmation: "abcdefgh"
+})
