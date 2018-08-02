@@ -3,6 +3,7 @@ import { WorkflowResourceService } from "./workflow_resource.service";
 import { Workflow } from "../models/workflow";
 import { Maybe } from "../../lib/maybe";
 import { ActivatedRoute } from "@angular/router";
+import { EventMessage } from '../models/event_message';
 
 @Component({
   templateUrl: './workflow_show.component.html',
@@ -26,5 +27,9 @@ export class WorkflowShowComponent {
         .subscribe(workflow => {
             this.workflow = workflow;
         });
+  }
+
+  headerKeys(event_message : EventMessage) {
+    return Object.keys(event_message);
   }
 }
