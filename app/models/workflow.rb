@@ -5,6 +5,8 @@ class Workflow
   field :name, type: String
   field :workflow_ids, type: Array
 
+  index({:workflow_ids => 1})
+
   def self.existing_workflow(workflow_id)
     Workflow.where(workflow_ids: workflow_id).first
   end
