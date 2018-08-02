@@ -12,7 +12,11 @@
       <tr *ngFor="let event_message of workflow.event_messages">
         <td>{{event_message.event_name}}</td>
         <td>{{event_message.workflow_id}}</td>
-        <td>{{event_message.headers}}</td>
+        <td>
+          <ul *ngFor="let header_key of Object.keys(event_message.headers)">
+            <li>{{header_key}}: {{event_message.headers[header_key]}}</li>
+          </ul>
+        </td>
       </tr>
     </tbody>
   </table>
