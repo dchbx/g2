@@ -14,6 +14,10 @@ EventMessageKind.create!(
 )
 
 EventMessageKind.create!(
+  name_expression: "resource.#"
+)
+
+EventMessageKind.create!(
   name_expression: "info.application.gluedb.policies.enrollment_action_determined",
   merges_workflows: true,
   child_workflow_extractor: JsonChildWorkflowExtractor.new(

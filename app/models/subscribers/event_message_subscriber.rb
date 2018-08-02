@@ -6,7 +6,7 @@ module Subscribers
       Acapi::Amqp::WorkerSpecification.new(
         :queue_name => "event_message_subscriber",
         :kind => :topic,
-        :routing_key => ["*.events.#", "*.application.gluedb.#"]
+        :routing_key => ["*.events.#", "*.application.gluedb.#","*.application.glue.#"]
       )
     end
 
