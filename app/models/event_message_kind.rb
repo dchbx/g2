@@ -8,8 +8,8 @@ class EventMessageKind
   embeds_one :child_workflow_extractor
 
   def exact_match?
-    return false if string.include?("*")
-    return false if string.include?("#")
+    return false if name_expression.include?("*")
+    return false if name_expression.include?("#")
     true
   end
 
