@@ -9,7 +9,7 @@ class EventMessageImportService
     return nil if workflow_id.blank?
     matched_message_type = @event_message_matcher.match_message(event_name)
     if matched_message_type
-      flat_headers = flatten_headers(props)
+      flat_headers = flatten_properties(props)
       new_message = EventMessage.create!({
         event_name: event_name,
         workflow_id: workflow_id,
