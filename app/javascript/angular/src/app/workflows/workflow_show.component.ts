@@ -30,6 +30,6 @@ export class WorkflowShowComponent {
   }
 
   headerKeys(event_message : EventMessage) {
-    return Object.keys(event_message);
+    return Object.keys(event_message.headers);
   }
 }
