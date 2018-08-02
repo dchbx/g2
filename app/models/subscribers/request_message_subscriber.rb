@@ -6,7 +6,7 @@ module Subscribers
       Acapi::Amqp::WorkerSpecification.new(
         :queue_name => "request_message_subscriber",
         :kind => :topic,
-        :message_category => :request,
+        :message_category => :requests,
         :routing_key => ["resource.#"]
       )
     end
