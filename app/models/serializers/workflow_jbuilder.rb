@@ -19,11 +19,15 @@ module Serializers
       new_builder.to_builder(builder)
     end
 
+    def self.serialize_collection_element(workflow, builder)
+      builder.set!(:id, workflow.id.to_s)
+      builder.set!(:name, workflow.name)
+      builder.set!(:workflow_ids, workflow.workflow_ids)
+    end
+
     def self.serialize_collection(workflows, builder = Jbuilder.new)
       builder.array!(workflows) do |workflow|
-        builder.set!(:id, workflow.id.to_s)
-        builder.set!(:name, workflow.name)
-        builder.set!(:workflow_ids, workflow.workflow_ids)
+        self.serialize_collection_element(workflow, builder)
       end
       builder
     end

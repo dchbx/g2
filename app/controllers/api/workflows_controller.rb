@@ -1,8 +1,8 @@
 module Api
 class WorkflowsController < ApplicationController
   def index
-    @workflows = Workflow.all.limit(20)
-    render json: ::Serializers::WorkflowJbuilder.serialize_collection(@workflows).target!, status: 200
+    @workflows = Resources::WorkflowsIndex.new
+    render json: @workflows.serialize, status: 200
   end
 
   def show

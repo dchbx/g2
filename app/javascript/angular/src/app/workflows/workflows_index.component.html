@@ -6,8 +6,16 @@
       <th>Name</th>
     </tr>
   </thead>
+  <tfoot>
+    <tr>
+      <td>Page {{workflows.page}}</td>
+    </tr>
+    <tr>
+      <td>{{workflows.count}} of {{workflows.total}} Records</td>
+    </tr>
+  </tfoot>
   <tbody>
-    <tr *ngFor="let workflow of workflows">
+    <tr *ngFor="let workflow of workflows.workflows">
       <td>
         <a [routerLink]="['/workflows', workflow.id]">{{workflow.name}}</a>
       </td>

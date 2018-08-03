@@ -3,7 +3,7 @@ class Workflow
   include Mongoid::Timestamps
 
   field :name, type: String
-  field :workflow_ids, type: Array
+  field :workflow_ids, type: Array, default: []
 
   index({:workflow_ids => 1})
 
