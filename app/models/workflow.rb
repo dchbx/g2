@@ -6,6 +6,7 @@ class Workflow
   field :workflow_ids, type: Array, default: []
 
   index({:workflow_ids => 1})
+  index({:updated_at => 1})
 
   def self.existing_workflow(workflow_id)
     Workflow.where(workflow_ids: workflow_id).first

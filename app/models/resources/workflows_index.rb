@@ -32,7 +32,7 @@ class WorkflowsIndex
   protected
 
   def find_records
-    base_query = ::Workflow.order_by(created_at: 1)
+    base_query = ::Workflow.order_by(updated_at: -1)
     @total = base_query.count
     selection_query = base_query.skip(skip_offset).limit(@per_page)
     @workflows = selection_query
