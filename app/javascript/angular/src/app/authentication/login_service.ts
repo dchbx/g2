@@ -12,7 +12,7 @@ export class LoginService {
   constructor(private http: HttpClient, private router: Router) {
   }
   
-  login(login_attempt : LoginAttempt, return_url) {
+  login(login_attempt : LoginAttempt, return_url : string) {
     var requestHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
     });
