@@ -19,7 +19,6 @@ export class WorkflowsIndexComponent {
   constructor(private workflowResourceService: WorkflowResourceService) { }
 
   ngOnInit() {
-    // get users from secure api end point
     this.workflowResourceService.getAll()
         .subscribe(workflows => {
             this.workflows = workflows;

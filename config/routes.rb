@@ -15,6 +15,12 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api do
     resources :workflows, only: [:show, :index], format: :json
+
+    resources :reports, only: [], format: :json do
+      collection do
+        get "coverage_selected_disposition"
+      end
+    end
   end
 
   match "*path" => 'pages#index', via: :all

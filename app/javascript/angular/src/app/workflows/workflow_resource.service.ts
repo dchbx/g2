@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { WorkflowIndexResource } from './workflow_index_resource';
 import { Workflow } from '../models/workflow';

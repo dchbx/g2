@@ -3,6 +3,7 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <a class="nav-link" routerLink="/workflows" routerLinkActive="active">Workflows</a>
+            <a class="nav-link" routerLink="/reports" routerLinkActive="active">Reports</a>
           </li>
         </ul>
         <a href="#" *ngIf="userLoggedIn()" (click)="logout()" class="text-light">Log Out {{userName()}}</a>

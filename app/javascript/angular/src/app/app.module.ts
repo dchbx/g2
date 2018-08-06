@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { UserLoginComponent } from './authentication/user_login.component'
 import { WorkflowsIndexComponent } from './workflows/workflows_index.component';
 import { WorkflowShowComponent } from './workflows/workflow_show.component';
+import { ReportsComponent } from './reports/reports.component';
 import { UserAuthenticated } from './authentication/user_authenticated';
 import { JwtInterceptor } from "./authentication/jwt_interceptor"
 
@@ -16,7 +17,8 @@ import { JwtInterceptor } from "./authentication/jwt_interceptor"
 const appRoutes : Routes = [
   { path: 'user_login', component: UserLoginComponent },
   { path: 'workflows/:id', component: WorkflowShowComponent, canActivate: [UserAuthenticated] },
-  { path: 'workflows', component: WorkflowsIndexComponent, canActivate: [UserAuthenticated] }
+  { path: 'workflows', component: WorkflowsIndexComponent, canActivate: [UserAuthenticated] },
+  { path: 'reports', component: ReportsComponent, canActivate: [UserAuthenticated] }
 ];
 
 @NgModule({
@@ -24,6 +26,7 @@ const appRoutes : Routes = [
     AppComponent,
     WorkflowShowComponent,
     WorkflowsIndexComponent,
+    ReportsComponent,
     UserLoginComponent
   ],
   imports: [
