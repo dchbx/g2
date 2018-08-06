@@ -12,18 +12,20 @@ import { WorkflowShowComponent } from './workflows/workflow_show.component';
 import { ReportsComponent } from './reports/reports.component';
 import { UserAuthenticated } from './authentication/user_authenticated';
 import { JwtInterceptor } from "./authentication/jwt_interceptor"
-
+import { HomeComponent } from './home/home.component';
 
 const appRoutes : Routes = [
   { path: 'user_login', component: UserLoginComponent },
   { path: 'workflows/:id', component: WorkflowShowComponent, canActivate: [UserAuthenticated] },
   { path: 'workflows', component: WorkflowsIndexComponent, canActivate: [UserAuthenticated] },
-  { path: 'reports', component: ReportsComponent, canActivate: [UserAuthenticated] }
+  { path: 'reports', component: ReportsComponent, canActivate: [UserAuthenticated] },
+  { path: '', component: HomeComponent, canActivate: [UserAuthenticated] }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     WorkflowShowComponent,
     WorkflowsIndexComponent,
     ReportsComponent,

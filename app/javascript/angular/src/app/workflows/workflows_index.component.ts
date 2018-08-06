@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { WorkflowResourceService } from "./workflow_resource.service";
-import { WorkflowIndexEntry } from './workflow_index_entry';
 import { WorkflowIndexResource } from './workflow_index_resource';
 
 @Component({
