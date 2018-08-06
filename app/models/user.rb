@@ -25,4 +25,10 @@ class User
   def self.generate_jti
     SecureRandom.uuid.gsub("-", "")
   end
+
+  def on_jwt_dispatch(token, payload)
+    revocation_time = Time.now
+    BlacklistedToken.destroy_old_tokens(revocation_time - 1.minute)
+    BlacklistedToken.create_exp_revocation(self.id.to_s, payload['jti'],payload['exp'])
+  end
 end

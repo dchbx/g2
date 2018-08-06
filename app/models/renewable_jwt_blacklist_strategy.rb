@@ -9,8 +9,6 @@ module RenewableJwtBlacklistStrategy
     # Revoke this and all active tokens for the user
     revocation_time = Time.now
     BlacklistedToken.destroy_old_tokens(revocation_time - 1.minute)
-    BlacklistedToken.create_exp_revocation(user.id.to_s, payload['jti'],payload['exp'])
-    revocation_time = Time.now
     BlacklistedToken.revoke_all(user.id.to_s, revocation_time)
   end
 end
