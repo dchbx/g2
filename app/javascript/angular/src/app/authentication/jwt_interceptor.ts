@@ -6,6 +6,7 @@ import { JwtUserService } from './jwt_user_service';
 import { Router } from "@angular/router";
 import { JwtRefreshService } from './jwt_refresh_service';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
  
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -29,7 +30,16 @@ export class JwtInterceptor implements HttpInterceptor {
                     Authorization: `Bearer ${currentUser.token}`
                 }
             });
-            return next.handle(newRequest);
+            return next.handle(newRequest).catch(
+                // Oh hey, our token was revoked.
+                (err: HttpErrorResponse) => {
+                  if (this.router.url !== '/user_login' && err.status === 401) {
+                    JwtUserService.remove();
+                    this.router.navigate(['/user_login']);
+                  }
+                  return Observable.throw(err);
+                }
+            );
         } else {
             // Send me to the login page.
             return next.handle(request).catch(

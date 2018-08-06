@@ -11,9 +11,7 @@ import { User } from './authentication/user';
 })
 export class AppComponent {
 
-  constructor(private login_service : LoginService) {
-
-  }
+  constructor(private login_service : LoginService) { }
 
   userLoggedIn() {
     return JwtUserService.hasValidToken();
