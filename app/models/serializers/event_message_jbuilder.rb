@@ -7,12 +7,12 @@ module Serializers
     def to_builder(builder)
       builder.set!(:event_name, @event_message.event_name)
       builder.set!(:workflow_id, @event_message.workflow_id)
-      if @event_message.headers.empty?
+      if @event_message.event_headers.empty?
         builder.set!(:headers, {})
       else
         builder.set!(:headers) do
-          @event_message.headers.each_pair do |k,v|
-            builder.set!(k, v)
+          @event_message.event_headers.each do |eh|
+            builder.set!(eh.name, eh.value)
           end
         end
       end

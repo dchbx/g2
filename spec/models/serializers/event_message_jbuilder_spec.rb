@@ -10,12 +10,24 @@ describe Serializers::EventMessageJbuilder, "serializing an event_message" do
       5 => 2
     }
   end
+
+  let(:event_headers) do
+    eh = []
+    headers.each_pair do |k,v|
+      eh << EventHeader.new(
+        name: k.to_s,
+        value: v
+      )
+    end
+    eh
+  end
+
   let(:event_message) do
      instance_double(
        ::EventMessage,
        event_name: event_name,
        workflow_id: workflow_id,
-       headers: headers
+       event_headers: event_headers
      )
   end
 

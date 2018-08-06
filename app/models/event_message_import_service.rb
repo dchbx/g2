@@ -10,10 +10,17 @@ class EventMessageImportService
     matched_message_type = @event_message_matcher.match_message(event_name)
     if matched_message_type
       flat_headers = flatten_properties(props)
+      stored_headers = []
+      flat_headers.each_pair do |k,v|
+        stored_headers << EventHeader.new(
+          name: k.to_s,
+          value: v
+        )
+      end
       new_message = EventMessage.create!({
         event_name: event_name,
         workflow_id: workflow_id,
-        headers: flat_headers
+        event_headers: stored_headers
       })
       em_payload = EventMessagePayload.create!(
          body: payload,
