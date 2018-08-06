@@ -36,7 +36,7 @@ class WorkflowsIndex
     @total = base_query.count
     selection_query = base_query.skip(skip_offset).limit(@per_page)
     @workflows = selection_query
-    @count = @workflows.count
+    @count = base_query.count(skip: skip_offset, limit: @per_page)
   end
 
   def skip_offset
