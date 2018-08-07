@@ -8,6 +8,19 @@
   </thead>
   <tfoot>
     <tr>
+      <pagination-controls  id="workflows"
+                      (pageChange)="pageChanged($event)"
+                      maxSize="9"
+                      directionLinks="true"
+                      autoHide="false"
+                      previousLabel="Previous"
+                      nextLabel="Next"
+                      screenReaderPaginationLabel="Pagination"
+                      screenReaderPageLabel="page"
+                      screenReaderCurrentLabel="You're on page">
+      </pagination-controls>
+    </tr>
+    <tr>
       <td>Page {{workflows.page}}</td>
     </tr>
     <tr>
@@ -15,7 +28,7 @@
     </tr>
   </tfoot>
   <tbody>
-    <tr *ngFor="let workflow of workflows.workflows">
+    <tr *ngFor="let workflow of workflows.workflows | paginate: { id: 'workflows', itemsPerPage: workflows.per_page, currentPage: workflows.page, totalItems: workflows.total }">
       <td>
         <a [routerLink]="['/workflows', workflow.id]">{{workflow.name}}</a>
       </td>

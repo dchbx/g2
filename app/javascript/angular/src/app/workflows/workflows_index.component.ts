@@ -6,7 +6,9 @@ import { WorkflowIndexResource } from './workflow_index_resource';
   templateUrl: './workflows_index.component.html',
   providers: [WorkflowResourceService]
 })
+
 export class WorkflowsIndexComponent {
+  p: 1;
   workflows : WorkflowIndexResource = {
     total_pages: 1,
     count: 0,
@@ -19,13 +21,16 @@ export class WorkflowsIndexComponent {
   constructor(private workflowResourceService: WorkflowResourceService) { }
 
   ngOnInit() {
-    this.workflowResourceService.getAll()
-        .subscribe(workflows => {
-            this.workflows = workflows;
-        });
+    this.workflowResourceService.getPage(1)
+      .subscribe(workflows => {
+          this.workflows = workflows;
+      });
   }
 
-  navigateToPage(page : number, per_page: number) {
-    console.log("HEYA");
+  pageChanged(page: number) {
+    this.workflowResourceService.getPage(page)
+      .subscribe(workflows => {
+          this.workflows = workflows;
+      });
   }
 }

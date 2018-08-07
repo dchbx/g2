@@ -11,6 +11,10 @@ export class WorkflowResourceService {
     return this.http.get<WorkflowIndexResource>('/api/workflows');
   }
 
+  getPage(page) {
+    return this.http.get<WorkflowIndexResource>('/api/workflows', { params: { page: page } });
+  }
+
   get(workflowId : string) {
     return this.http.get<Workflow>('/api/workflows/' + workflowId + ".json");
   }

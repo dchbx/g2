@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from "@angular/forms";
 
 
@@ -33,8 +34,9 @@ const appRoutes : Routes = [
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     FormsModule,
+    HttpClientModule,
+    NgxPaginationModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true })
   ],
   providers: [
