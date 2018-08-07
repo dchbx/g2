@@ -40,7 +40,6 @@ module Reports
     def perform_counts
       @total = EventMessage.where(:event_name => EVENT_NAME).count
       EventMessage.where(:event_name => EVENT_NAME).each do |em|
-        @total = @total + 1
         categorize(em)
       end
     end
