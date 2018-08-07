@@ -6,12 +6,13 @@ class WorkflowsIndex
 
   attr_accessor :page, :per_page
 
-  attr_reader :workflows, :count, :total
+  attr_reader :workflows, :count, :total, :total_pages
   
   def initialize(opts = {})
     @workflows = []
     @count = 0
     @total = 0
+    @total_pages = 1
     @page = 1
     @per_page = PER_PAGE_DEFAULT
     super(opts)
@@ -23,6 +24,7 @@ class WorkflowsIndex
     builder.set!(:total, @total)
     builder.set!(:per_page, @per_page)
     builder.set!(:page, @page)
+    builder.set!(:total_pages, @total_pages)
     builder.set!(:workflows, @workflows) do |workflow|
       ::Serializers::WorkflowJbuilder.serialize_collection_element(workflow, builder)
     end
@@ -37,6 +39,7 @@ class WorkflowsIndex
     selection_query = base_query.skip(skip_offset).limit(@per_page)
     @workflows = selection_query
     @count = base_query.count(skip: skip_offset, limit: @per_page)
+    @total_pages = (@total / @per_page) + 1
   end
 
   def skip_offset
