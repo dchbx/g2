@@ -41,7 +41,7 @@ module Reports
       @total = EventMessage.where(:event_name => EVENT_NAME).count
       EventMessage.where(:event_name => EVENT_NAME).each do |em|
         @total = @total + 1
-        categorize(record)
+        categorize(em)
       end
     end
   end
