@@ -8,7 +8,6 @@ import { WorkflowIndexResource } from './workflow_index_resource';
 })
 
 export class WorkflowsIndexComponent {
-  p: 1;
   workflows : WorkflowIndexResource = {
     total_pages: 1,
     count: 0,

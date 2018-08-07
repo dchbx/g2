@@ -8,7 +8,7 @@
   </thead>
   <tfoot>
     <tr>
-      <pagination-controls  id="workflows"
+      <pagination-controls id="workflows"
                       (pageChange)="pageChanged($event)"
                       maxSize="9"
                       directionLinks="true"
@@ -19,12 +19,6 @@
                       screenReaderPageLabel="page"
                       screenReaderCurrentLabel="You're on page">
       </pagination-controls>
-    </tr>
-    <tr>
-      <td>Page {{workflows.page}}</td>
-    </tr>
-    <tr>
-      <td>{{workflows.count}} of {{workflows.total}} Records</td>
     </tr>
   </tfoot>
   <tbody>

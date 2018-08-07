@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { WorkflowIndexResource } from './workflow_index_resource';
 import { Workflow } from '../models/workflow';
@@ -11,8 +11,9 @@ export class WorkflowResourceService {
     return this.http.get<WorkflowIndexResource>('/api/workflows');
   }
 
-  getPage(page) {
-    return this.http.get<WorkflowIndexResource>('/api/workflows', { params: { page: page } });
+  getPage(page: number) {
+    var params = new HttpParams().set("page", page.toString());
+    return this.http.get<WorkflowIndexResource>('/api/workflows', { params: params} );
   }
 
   get(workflowId : string) {
