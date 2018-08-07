@@ -6,8 +6,9 @@ export interface WorkflowIndexEntry {
 
 export interface WorkflowIndexResource {
   workflows: Array<WorkflowIndexEntry>;
-  count: number;
-  total: number;
-  page: number;
-  per_page: number;
+  total_pages : number;
+  per_page : number;
+  page : number;
+  count : number;
+  total : number;
 }

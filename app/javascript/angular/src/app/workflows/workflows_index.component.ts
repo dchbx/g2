@@ -8,6 +8,7 @@ import { WorkflowIndexResource } from './workflow_index_resource';
 })
 export class WorkflowsIndexComponent {
   workflows : WorkflowIndexResource = {
+    total_pages: 1,
     count: 0,
     total: 0,
     page: 1,
@@ -22,5 +23,9 @@ export class WorkflowsIndexComponent {
         .subscribe(workflows => {
             this.workflows = workflows;
         });
+  }
+
+  navigateToPage(page : number, per_page: number) {
+    console.log("HEYA");
   }
 }
