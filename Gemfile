@@ -11,7 +11,7 @@ gem 'rails', '~> 5.1.5'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker'
 gem 'mongoid', '~> 7.0.1'
-gem 'acapi', git: "https://github.com/dchbx/acapi.git", tag: '1.2.0'
+gem 'acapi', git: "https://github.com/dchbx/acapi.git", tag: '1.3.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
@@ -23,7 +23,12 @@ gem 'acapi', git: "https://github.com/dchbx/acapi.git", tag: '1.2.0'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
+gem 'devise', '4.4.3'
+gem 'devise-jwt'
 gem 'pundit', '1.1.0'
+gem 'jbuilder', '2.7.0'
+gem 'capistrano', '3.10.2', require: false
+gem 'capistrano-rails', '1.3.1', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -41,3 +46,8 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+group :production do
+  gem 'unicorn', '5.4.1'
+  gem 'eye', '0.9.4'
+end

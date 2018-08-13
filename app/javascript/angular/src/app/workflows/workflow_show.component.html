@@ -1,0 +1,23 @@
+<div *ngIf="workflow">
+  <h1>{{workflow.name}}</h1>
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Event Name</th>
+        <th>Workflow ID</th>
+        <th>Headers</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event_message of workflow.event_messages">
+        <td>{{event_message.event_name}}</td>
+        <td>{{event_message.workflow_id}}</td>
+        <td>
+          <ul *ngFor="let header_key of headerKeys(event_message)">
+            <li>{{header_key}}: {{event_message.headers[header_key]}}</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

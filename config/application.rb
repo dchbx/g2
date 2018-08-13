@@ -24,10 +24,18 @@ module G2
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    config.session_store :disabled
 
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    
+    config.acapi.app_id = "g2"
+
+    unless Rails.env.test?
+      config.acapi.add_amqp_worker("Subscribers::EventMessageSubscriber")
+      config.acapi.add_amqp_worker("Subscribers::RequestMessageSubscriber")
+    end
   end
 end
