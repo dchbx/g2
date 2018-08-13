@@ -34,8 +34,8 @@ module G2
     config.acapi.app_id = "g2"
 
     unless Rails.env.test?
-      config.acapi.add_amqp_worker("Subscribers::EventMessageSubscriber")
-      config.acapi.add_amqp_worker("Subscribers::RequestMessageSubscriber")
+      # config.acapi.add_amqp_worker("Subscribers::EventMessageSubscriber")
+      # config.acapi.add_amqp_worker("Subscribers::RequestMessageSubscriber")
     end
   end
 end
