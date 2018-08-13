@@ -1,0 +1,118 @@
+@startuml
+hide empty member
+hide class circle
+
+skinparam class {
+  backgroundColor #D7B1D7
+}
+
+
+package Person as PersonDoc <<database >> {
+  class Person
+  class Email
+  class Address
+  class Phone
+
+  Person *-- Email
+  Person *-l- Address
+  Person *-- Phone
+}
+
+package Policy as PolicyDoc <<database>> {
+  class Policy
+  class CoverageSpan {
+    + hbx_enrollment_id
+  }
+  class SponsorContribution
+  class ContractHolder
+  class Enrollee
+
+  Policy "1" *-- "1..*" CoverageSpan
+  CoverageSpan "1" *-- "1" SponsorContribution
+  Policy *- ContractHolder
+  CoverageSpan "1" <-> "1..n" Enrollee
+}
+
+Person <--> Enrollee
+
+package Organization as OrgDoc <<database>> {
+  class Organization
+  class Profile
+  class IssuerProfile
+  class EmployerProfile
+  class BrokerProfile
+  class TradingPartner
+  class GeneralAgencyProfile
+  class HbxProfile
+
+  Organization *-l- Profile
+
+  Profile <|-l- EmployerProfile
+  Profile <|-u- IssuerProfile
+  Profile <|-u- BrokerProfile
+  Profile <|-- TradingPartner
+  Profile <|-- GeneralAgencyProfile
+  Profile <|-- HbxProfile
+}
+
+class Product
+class User
+class Site
+
+note "Clarify how we will represent these" as TBDNote1
+
+rectangle "Models to Clarify" as ToBeDone {
+  class BenefitMarket
+  class BenefitKind
+  class SponsoredBenefit {
+    + employer
+    + benefit_kind
+    + time_period
+  }
+}
+
+SponsorContribution <-> EmployerProfile
+
+ToBeDone .d. TBDNote1
+
+note "Need to be able\
+ \nto represent these in CV" as TBDNote2
+
+rectangle "Transactions" as TPTransactions {
+class TradingPartnerTransaction {
+  + source
+  + destination
+  + disposition
+  + subject
+  + action
+}
+
+class TransactionEventNotification {
+  + event_name
+  + protocol
+  + raw_payload
+}
+}
+
+TBDNote2 .. TPTransactions
+
+TradingPartnerTransaction *-- TransactionEventNotification
+
+class TradingAgreement {
+  + partner_profiles
+  + encoding_methods
+}
+
+note "How do we capture the method and protocol for encoding actions\
+ \nwe plan to send to trading partners, and how we make sure we store\
+ \nthe information to map consumed messages back?" as TBDNote3
+
+TBDNote3 .. TradingAgreement
+
+Product <--> IssuerProfile
+Product <--> Policy
+
+Person <--> ContractHolder
+
+Site <--> Organization
+@enduml
