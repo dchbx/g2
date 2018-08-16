@@ -6,7 +6,6 @@ skinparam class {
   backgroundColor #D7B1D7
 }
 
-
 package Person as PersonDoc <<database >> {
   class Person
   class Email
@@ -50,9 +49,9 @@ package Organization as OrgDoc <<database>> {
   Profile <|-l- EmployerProfile
   Profile <|-u- IssuerProfile
   Profile <|-u- BrokerProfile
-  Profile <|-- TradingPartner
-  Profile <|-- GeneralAgencyProfile
-  Profile <|-- HbxProfile
+  Profile <|-d- TradingPartner
+  Profile <|-d- GeneralAgencyProfile
+  Profile <|-d- HbxProfile
 }
 
 class Product
@@ -62,8 +61,6 @@ class Site
 note "Clarify how we will represent these" as TBDNote1
 
 rectangle "Models to Clarify" as ToBeDone {
-  class BenefitMarket
-  class BenefitKind
   class SponsoredBenefit {
     + employer
     + benefit_kind
@@ -73,7 +70,7 @@ rectangle "Models to Clarify" as ToBeDone {
 
 SponsorContribution <-> EmployerProfile
 
-ToBeDone .d. TBDNote1
+ToBeDone .. TBDNote1
 
 note "Need to be able\
  \nto represent these in CV" as TBDNote2
@@ -87,27 +84,29 @@ class TradingPartnerTransaction {
   + action
 }
 
-class TransactionEventNotification {
+class TransactionEvent {
   + event_name
   + protocol
-  + raw_payload
 }
 }
 
 TBDNote2 .. TPTransactions
 
-TradingPartnerTransaction *-- TransactionEventNotification
+TradingPartnerTransaction *-- TransactionEvent
 
-class TradingAgreement {
-  + partner_profiles
-  + encoding_methods
-}
+class TradingAgreement
 
-note "How do we capture the method and protocol for encoding actions\
- \nwe plan to send to trading partners, and how we make sure we store\
- \nthe information to map consumed messages back?" as TBDNote3
+class EdiTradingAgreement
+class LegacyCvTradingAgreement
+class CvTradingAgreement
 
-TBDNote3 .. TradingAgreement
+TradingAgreement <-r-> TradingPartner
+
+TradingAgreement <|-- EdiTradingAgreement
+TradingAgreement <|-l- LegacyCvTradingAgreement
+TradingAgreement <|-- CvTradingAgreement
+
+TradingPartnerTransaction <-> TradingAgreement
 
 Product <--> IssuerProfile
 Product <--> Policy
@@ -115,4 +114,10 @@ Product <--> Policy
 Person <--> ContractHolder
 
 Site <--> Organization
+
+class Occurence {
+  + raw_payload
+}
+
+Occurence <-r-> TransactionEvent
 @enduml
